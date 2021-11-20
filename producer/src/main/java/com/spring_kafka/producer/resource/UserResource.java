@@ -14,19 +14,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class UserResource {
 
-    private final KafkaTemplate<String, String>kafkaTemplate;
+    private final KafkaTemplate<String, Object>kafkaTemplate;
 
-    private static final String TOPIC="kafka_Example";
+    private static final String TOPIC="kafka_Example_json";
 
     @GetMapping("/publish/{name}")
     public String post(@PathVariable("name")String name){
         System.out.println(name);
-        kafkaTemplate.send(TOPIC, name);
-       /* User user=new User();
+        User user=new User();
         user.setName(name);
         user.setDept("Technology");
         user.setSalary(12000L);
-        kafkaTemplate.send(TOPIC, user);*/
+        System.out.println(user);
+        kafkaTemplate.send(TOPIC, user);
         return "Published successfully";
     }
 
