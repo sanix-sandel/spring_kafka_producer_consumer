@@ -17,7 +17,7 @@ import java.util.Map;
 public class KafkaConfig {
 
     @Bean
-    public ProducerFactory<String, Object>producerFactory(){
+    public ProducerFactory<String, User>producerFactory(){
         Map<String, Object> config=new HashMap<>();
 
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092");
@@ -29,7 +29,7 @@ public class KafkaConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, Object>kafkaTemplate(){
+    public KafkaTemplate<String, User>kafkaTemplate(){
         return new KafkaTemplate<>(producerFactory());
     }
 
