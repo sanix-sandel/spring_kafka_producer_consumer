@@ -1,8 +1,7 @@
-package com.spring_kafka.producer.resource;
+package com.spring_kafka.producer.services;
 
 import com.spring_kafka.producer.entity.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,9 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class UserResource {
 
-    private final KafkaTemplate<String, Object>kafkaTemplate;
+   /* private final KafkaTemplate<String, Object>kafkaTemplate;
 
-    private static final String TOPIC="kafka_Example_json";
+    private static final String TOPIC="kafka_Example_json";*/
+
+    private final ProducerService producerService;
 
     @GetMapping("/publish/{name}")
     public String post(@PathVariable("name")String name){
@@ -26,7 +27,7 @@ public class UserResource {
         user.setDept("Technology");
         user.setSalary(12000L);
         System.out.println(user);
-        kafkaTemplate.send(TOPIC, user);
+        producerService.sendMail(user);
         return "Published successfully";
     }
 
